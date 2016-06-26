@@ -28,6 +28,10 @@ public class Snake {
     }
   }
 
+  public int getDistanceTotal() {
+    return this.distanceTotal;
+  }
+
   public TraverseResult goUp(int row, int col) {
     TraverseResult traverseResult = new TraverseResult(-1, new int[]{0, 0}, false, false, false);
     int point;
@@ -134,7 +138,6 @@ public class Snake {
     int maxPoint = 0;
     int maxIdx = 0;
 
-    //System.out.println(nextTop.getPoint() + " " + nextRight.getPoint() + " " + nextBottom.getPoint());
     for (int i = 0; i < traverseResults.length; i++) {
       if (traverseResults[i].getPoint() > maxPoint) {
         maxPoint = traverseResults[i].getPoint();
@@ -142,7 +145,6 @@ public class Snake {
       }
     }
 
-    //System.out.println(maxIdx);
     return traverseResults[maxIdx];
   }
 
@@ -158,7 +160,6 @@ public class Snake {
       startCoordinate = traverseResult.getCoordinate();
       visitedPoint[startCoordinate[0]][startCoordinate[1]] = true;
 
-      System.out.println(startCoordinate[0] + " " + startCoordinate[1]);
       if (!traverseResult.isCanGoThrough()) {
         distanceTotal = -1;
         break;
@@ -177,7 +178,4 @@ public class Snake {
 
   }
 
-  public int getDistanceTotal() {
-    return this.distanceTotal;
-  }
 }

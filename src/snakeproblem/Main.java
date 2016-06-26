@@ -13,20 +13,20 @@ import java.io.IOException;
  *
  * @author irfannurhakim
  */
-public class SnakeProblem {
+public class Main {
 
   /**
    * @param args the command line arguments
    * @throws java.io.IOException
    */
   public static void main(String[] args) throws IOException {
-    // TODO code application logic here
     
+    // Get filepath argument
     String fileDir = (args.length > 0) ? args[0] :  "test/test.txt" ;
 
-    Map map = null;
+    Map map;
 
-    // Readfile
+    // Attemp for read file, throw an exception if file doesn't exist
     try (
       BufferedReader br = new BufferedReader(new FileReader(fileDir))) {
       StringBuilder sb = new StringBuilder();
@@ -36,9 +36,10 @@ public class SnakeProblem {
       int rows = Integer.parseInt(colsAndRows.split(" ")[0]);
       int cols = Integer.parseInt(colsAndRows.split(" ")[1]);
       
+      // Assign row and col to map object
       map = new Map(rows, cols);
 
-      //Loop for init value
+      // Assign value for each point
       for (int i = 0; i < rows; i++) {
         String points = br.readLine();
         for (int j = 0; j < cols; j++) {
@@ -49,10 +50,14 @@ public class SnakeProblem {
       
       // Run Snake
       Snake snake = new Snake(map);
+      
+      // Initialize Visited Point
       snake.initVisitedPoint();
       
-      //System.out.println(map.getPoints());
+      // Make snake object to Start traversing Map
       snake.startTraverseMap(new int[]{ map.getRows(), 0 });
+      
+      // Print the result
       System.out.println(snake.getDistanceTotal());
     }
   }
